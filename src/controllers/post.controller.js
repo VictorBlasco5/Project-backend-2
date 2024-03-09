@@ -77,3 +77,54 @@ export const deletePosts = async (req, res) => {
         })
     }
 }
+
+
+
+//ACTUALIZAR POST
+
+export const updatePosts = async (req, res) => {
+    try {
+
+        
+        const userId = req.tokenData.userId;
+        const postId = req.params.id
+        const description = req.body.description
+
+        //Validacion para que lo actualice el dueño del post
+
+        // const post = await Post.findById(postId)
+
+        // if(userId !== post.postId){
+        //     return res.status(400).json({
+        //         succes:false,
+        //         message:"You cant update the post"
+        //     })
+        // }
+
+        const postUpdate = await Post.updateOne(
+            {
+                _id: postId
+            },
+            {
+                
+                description: description
+            },
+            {
+                new: true
+            }
+        )
+        
+        res.status(200).json({
+            success: true,
+            message: "Post update successfully",
+            data: postUpdate
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "It is not possible to update the post",
+            error: error
+        })
+    }
+}
