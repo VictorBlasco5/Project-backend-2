@@ -4,15 +4,15 @@ export const PostSchema = new Schema(
     {
         description: {
             type: String,
-            require: false,
+            require: true,
         },
 
-        user_id: [ //Relacion. Va dentro de un array porque hay muchos libros favoritos
-            {
-                type: String,
-                ref: 'User'
-            }
-        ]
+        // user_id: [ 
+        //     {
+        //         type: String,
+        //         ref: 'User'
+        //     }
+        // ]
     },
     {
         timestamps: true,
