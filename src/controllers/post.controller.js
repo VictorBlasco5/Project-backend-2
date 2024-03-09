@@ -39,7 +39,7 @@ export const createPosts = async (req, res) => {
 //ELIMINAR POST
 export const deletePosts = async (req, res) => {
     try {
-        
+
         const userId = req.tokenData.userId
         const postId = req.params.id;
 
@@ -57,9 +57,9 @@ export const deletePosts = async (req, res) => {
 
         const postRemove = await Post.deleteOne(
 
-           {
+            {
                 _id: postId
-           }
+            }
         )
 
         res.status(200).json({
@@ -85,7 +85,7 @@ export const deletePosts = async (req, res) => {
 export const updatePosts = async (req, res) => {
     try {
 
-        
+
         const userId = req.tokenData.userId;
         const postId = req.params.id
         const description = req.body.description
@@ -106,14 +106,14 @@ export const updatePosts = async (req, res) => {
                 _id: postId
             },
             {
-                
+
                 description: description
             },
             {
                 new: true
             }
         )
-        
+
         res.status(200).json({
             success: true,
             message: "Post update successfully",
@@ -137,8 +137,32 @@ export const getPosts = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            message: "Post retrieved successfully",
+            message: "Posts retrieved successfully",
             data: allPosts
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "It is not possible to recover the posts",
+            error: error
+        })
+    }
+}
+
+//RECUPERAR POST POR ID
+export const getPostById = async (req, res) => {
+    try {
+
+
+        const postId = req.params.id
+
+        const recoverPost = await Post.findById(postId)
+        
+        res.status(200).json({
+            success: true,
+            message: "Post retrieved successfully",
+            data: recoverPost
         })
 
     } catch (error) {
