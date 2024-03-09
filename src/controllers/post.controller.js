@@ -128,3 +128,24 @@ export const updatePosts = async (req, res) => {
         })
     }
 }
+
+//RECUPERAR TODOS LOS POSTS
+export const getPosts = async (req, res) => {
+    try {
+
+        const allPosts = await Post.find()
+
+        res.status(200).json({
+            success: true,
+            message: "Post retrieved successfully",
+            data: allPosts
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "It is not possible to recover the post",
+            error: error
+        })
+    }
+}
