@@ -6,13 +6,10 @@ export const PostSchema = new Schema(
             type: String,
             require: true,
         },
-
-        // user_id: [ 
-        //     {
-        //         type: String,
-        //         ref: 'User'
-        //     }
-        // ]
+        userId: {
+            type: String,
+            require: true
+        }
     },
     {
         timestamps: true,

@@ -5,7 +5,7 @@ export const createPosts = async (req, res) => {
     try {
 
         const description = req.body.description;
-        const userId = req.tokenData.user_id
+        const userId = req.tokenData.userId
 
         if (!description) {
             return res.status(404).json({
@@ -17,7 +17,7 @@ export const createPosts = async (req, res) => {
         const newPost = await Post.create(
             {
                 description: description,
-                user_id: userId
+                userId: userId
             }
         )
 
