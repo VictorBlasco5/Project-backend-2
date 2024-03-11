@@ -199,3 +199,29 @@ export const getMyPosts = async (req, res) => {
         })
     }
 }
+
+//RECUPERAR LOS POSTS DE UN USUARIO
+export const getPostsOfUser = async (req, res) => {
+    try {
+
+        const userId = req.params.id;
+
+        const postsUser = await Post.find(
+            {
+                userId
+            }
+        )
+
+        res.status(200).json({
+            success: true,
+            message: "Posts retrieved successfully",
+            data: postsUser
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "It is not possible to recover the posts",
+            error: error
+        })
+    }
+}
