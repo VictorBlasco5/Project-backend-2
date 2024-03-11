@@ -9,7 +9,13 @@ export const PostSchema = new Schema(
         userId: {
             type: String,
             require: true
+        },
+        like: [ //Relacion. Va dentro de un array porque hay muchos likes en un post
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
         }
+    ]
     },
     {
         timestamps: true,

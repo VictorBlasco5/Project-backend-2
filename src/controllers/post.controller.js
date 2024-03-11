@@ -1,4 +1,5 @@
 import Post from "../models/Post.js";
+import User from "../models/User.js";
 
 //CREAR POST
 export const createPosts = async (req, res) => {
@@ -155,7 +156,7 @@ export const getPostById = async (req, res) => {
         const postId = req.params.id
 
         const recoverPost = await Post.findById(postId)
-        
+
         res.status(200).json({
             success: true,
             message: "Post retrieved successfully",
@@ -220,6 +221,54 @@ export const getPostsOfUser = async (req, res) => {
         res.status(500).json({
             success: false,
             message: "It is not possible to recover the posts",
+            error: error
+        })
+    }
+}
+
+//DAR Y QUITAR LIKE A UN POST
+export const addLike = async (req, res) => {
+    try {
+
+        const userId = req.tokenData.userId;
+        const postId = req.params.id;
+
+        const post = await Post.findById(
+            {
+                _id: postId
+            }
+        )
+
+        const user = await Post.findOne(
+            {
+                like: userId
+            }
+        )
+
+        if (!user) {
+            post.like.push(userId);
+            await post.save();
+
+            return res.status(200).json({
+                success: true,
+                message: "Like added"
+            })
+        }
+
+        if (user) {
+            post.like.pop(userId);
+            await post.save();
+
+            return res.status(200).json({
+                success: true,
+                message: "Like removed"
+            })
+        }
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "It is not possible to added the like",
             error: error
         })
     }
