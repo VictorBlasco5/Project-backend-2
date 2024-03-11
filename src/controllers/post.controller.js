@@ -106,7 +106,6 @@ export const updatePosts = async (req, res) => {
                 _id: postId
             },
             {
-
                 description: description
             },
             {
@@ -154,7 +153,6 @@ export const getPosts = async (req, res) => {
 export const getPostById = async (req, res) => {
     try {
 
-
         const postId = req.params.id
 
         const recoverPost = await Post.findById(postId)
@@ -169,6 +167,34 @@ export const getPostById = async (req, res) => {
         res.status(500).json({
             success: false,
             message: "It is not possible to recover the post",
+            error: error
+        })
+    }
+}
+
+//RECUPERAR MIS POSTS
+export const getMyPosts = async (req, res) => {
+    try {
+
+        const userId = req.tokenData.userId;
+
+        const myPosts = await Post.find(
+            {
+                userId
+            }
+        )
+
+        console.log(myPosts)
+
+        res.status(200).json({
+            success: true,
+            message: "Posts retrieved successfully",
+            data: myPosts
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "It is not possible to recover the posts",
             error: error
         })
     }
