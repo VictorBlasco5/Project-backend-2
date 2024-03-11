@@ -3,7 +3,6 @@ import Post from "../models/Post.js";
 //CREAR POST
 export const createPosts = async (req, res) => {
     try {
-
         const description = req.body.description;
         const userId = req.tokenData.userId
 

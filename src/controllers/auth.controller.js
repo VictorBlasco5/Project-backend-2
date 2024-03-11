@@ -4,8 +4,18 @@ import jwt from "jsonwebtoken"
 
 export const register = async (req, res) => {
     try {
+		const name = req.body.name
         const email = req.body.email
         const password = req.body.password
+
+		if(!name) {
+			return res.status(400).json(
+				{
+					success: false,
+					message: "Enter a name"
+				}
+			)
+		}
 
         if (password.length < 6 || password.length > 10) {
             return res.status(400).json({
@@ -27,6 +37,7 @@ export const register = async (req, res) => {
 
         const newUser = await User.create(
             {
+				name: name,
                 email: email,
                 password: passwordEncrypted
             }

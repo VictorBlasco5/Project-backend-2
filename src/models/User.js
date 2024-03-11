@@ -4,7 +4,7 @@ export const UserSchema = new Schema(
     {
         name: {
             type: String,
-            require: false,
+            require: true,
             unique: true
         },
         email: {
