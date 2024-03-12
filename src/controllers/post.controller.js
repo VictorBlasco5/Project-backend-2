@@ -44,22 +44,22 @@ export const deletePosts = async (req, res) => {
         const postId = req.params.id;
 
         //añadir validacion de que lo elimina el creador del post
-        // const post = await Post.findById(postId)
+        const post = await Post.findById(postId)
 
-        // if(userId !== post.userId) {
-        //     return res.status(400) (
-        //         {
-        //             success:false,
-        //             message:"You cant delete the post"
-        //         }
-        //     )
-        // }
+        if(userId !== post.userId) {
+            return res.status(400) (
+                {
+                    success:false,
+                    message:"You cant delete the post"
+                }
+            )
+        }
 
-        const postRemove = await Post.deleteOne(
+        const postRemove = await Post.findByIdAndDelete(
 
             {
                 _id: postId
-            }
+            }           
         )
 
         res.status(200).json({
