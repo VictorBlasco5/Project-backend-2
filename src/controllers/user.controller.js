@@ -75,7 +75,7 @@ export const updateProfile = async (req, res) => {
                 new: true
             }
         )
-        
+
         res.status(200).json({
             success: true,
             message: "User update successfully",
@@ -104,10 +104,45 @@ export const deleteUser = async (req, res) => {
             message: "User deleted successfully",
             data: removeUser
         })
+
     } catch (error) {
         res.status(500).json({
             success: false,
             message: "It is not possible to delete the user",
+            error: error
+        })
+    }
+}
+
+//CAMBIO DE ROLE
+export const updateRole = async (req, res) => {
+    try {
+
+        const userId = req.params.id;
+        const role = req.body.role;
+
+        const newRole = await User.findByIdAndUpdate(
+            {
+                _id: userId
+            },
+            {
+                role: role
+            },
+            {
+                new: true
+            }
+        )
+
+        res.status(200).json({
+            success: true,
+            message: "Role update successfully",
+            data: newRole
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "It is not possible to update the role",
             error: error
         })
     }
