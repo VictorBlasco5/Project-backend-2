@@ -91,17 +91,16 @@ export const updatePosts = async (req, res) => {
         const description = req.body.description
 
         //Validacion para que lo actualice el dueño del post
+        const post = await Post.findById(postId)
 
-        // const post = await Post.findById(postId)
+        if(userId !== post.userId){
+            return res.status(400).json({
+                succes:false,
+                message:"You cant update the post"
+            })
+        }
 
-        // if(userId !== post.postId){
-        //     return res.status(400).json({
-        //         succes:false,
-        //         message:"You cant update the post"
-        //     })
-        // }
-
-        const postUpdate = await Post.updateOne(
+        const postUpdate = await Post.findByIdAndUpdate(
             {
                 _id: postId
             },
