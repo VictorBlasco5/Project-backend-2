@@ -90,3 +90,25 @@ export const updateProfile = async (req, res) => {
         })
     }
 }
+
+//ELIMINAR USUARIO
+export const deleteUser = async (req, res) => {
+    try {
+
+        const userId = req.params.id;
+
+        const removeUser = await User.findByIdAndDelete(userId)
+
+        res.status(200).json({
+            success: true,
+            message: "User deleted successfully",
+            data: removeUser
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "It is not possible to delete the user",
+            error: error
+        })
+    }
+}
