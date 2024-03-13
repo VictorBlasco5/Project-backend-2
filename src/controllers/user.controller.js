@@ -67,6 +67,16 @@ export const updateProfile = async (req, res) => {
         const {userId} = req.tokenData;
         const {email} = req.body;
 
+        const validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+		if (!validEmail.test(email)) {
+			return res.status(400).json(
+			    {
+			        success: false,
+			        message: "Format email invalid"
+			    }
+			)
+        }
+
         const userProfile = await User.findOneAndUpdate(
             {
                 _id: userId
