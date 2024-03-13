@@ -110,6 +110,16 @@ export const deleteUser = async (req, res) => {
 
         const userId = req.params.id;
 
+
+        if(userId !== userId.userId) {
+			return res.status(400).json(
+				{
+					success: false,
+					message: "The user doesnt exist"
+				}
+			)
+		}
+
         const removeUser = await User.findByIdAndDelete(userId)
 
         res.status(200).json({
