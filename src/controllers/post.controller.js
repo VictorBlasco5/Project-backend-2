@@ -4,9 +4,11 @@ import User from "../models/User.js";
 //CREAR POST
 export const createPosts = async (req, res) => {
     try {
-        const description = req.body.description;
-        const userId = req.tokenData.userId
-
+        // const description = req.body.description;
+        // const userId = req.tokenData.userId
+        const { description } = req.body;
+        const { userId } = req.tokenData;
+        
         if (!description) {
             return res.status(404).json({
                 success: false,
@@ -40,7 +42,8 @@ export const createPosts = async (req, res) => {
 export const deletePosts = async (req, res) => {
     try {
 
-        const userId = req.tokenData.userId
+        // const userId = req.tokenData.userId
+        const {userId} = req.tokenData;
         const postId = req.params.id;
 
         //añadir validacion de que lo elimina el creador del post
@@ -86,9 +89,12 @@ export const updatePosts = async (req, res) => {
     try {
 
 
-        const userId = req.tokenData.userId;
-        const postId = req.params.id
-        const description = req.body.description
+        // const userId = req.tokenData.userId;
+        // const postId = req.params.id
+        // const description = req.body.description
+        const {userId} = req.tokenData;
+        const postId = req.params.id;
+        const {description} = req.body;
 
         //Validacion para que lo actualice el dueño del post
         const post = await Post.findById(postId)
@@ -152,7 +158,7 @@ export const getPosts = async (req, res) => {
 export const getPostById = async (req, res) => {
     try {
 
-        const postId = req.params.id
+        const postId = req.params.id;
 
         const recoverPost = await Post.findById(postId)
 
@@ -175,7 +181,8 @@ export const getPostById = async (req, res) => {
 export const getMyPosts = async (req, res) => {
     try {
 
-        const userId = req.tokenData.userId;
+        // const userId = req.tokenData.userId;
+        const {userId} = req.tokenData;
 
         const myPosts = await Post.find(
             {
@@ -229,7 +236,8 @@ export const getPostsOfUser = async (req, res) => {
 export const addLike = async (req, res) => {
     try {
 
-        const userId = req.tokenData.userId;
+        // const userId = req.tokenData.userId;
+        const {userId} = req.tokenData;
         const postId = req.params.id;
 
         const post = await Post.findById(

@@ -5,9 +5,10 @@ import { handleError } from "../utils/handleError.js";
 
 export const register = async (req, res) => {
 	try {
-		const name = req.body.name
-		const email = req.body.email
-		const password = req.body.password
+		// const name = req.body.name
+		// const email = req.body.email
+		// const password = req.body.password
+		const { name, email, password } = req.body;
 
 		if (!name) {
 			return res.status(400).json(
@@ -70,8 +71,9 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
 	try {
-		const email = req.body.email;
-		const password = req.body.password;
+		// const email = req.body.email;
+		// const password = req.body.password;
+		const { email, password } = req.body;
 
 		if (!email || !password) {
 			return res.status(400).json({

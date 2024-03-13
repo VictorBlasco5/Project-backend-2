@@ -26,7 +26,8 @@ export const getUsers = async (req, res) => {
 export const getUserProfile = async (req, res) => {
     try {
 
-        const userId = req.tokenData.userId
+        // const userId = req.tokenData.userId
+        const {userId} = req.tokenData;
 
         const userProfile = await User.find(
             {
@@ -61,8 +62,10 @@ export const getUserProfile = async (req, res) => {
 export const updateProfile = async (req, res) => {
     try {
 
-        const userId = req.tokenData.userId;
-        const email = req.body.email
+        // const userId = req.tokenData.userId;
+        // const email = req.body.email
+        const {userId} = req.tokenData;
+        const {email} = req.body;
 
         const userProfile = await User.findOneAndUpdate(
             {
@@ -119,7 +122,8 @@ export const updateRole = async (req, res) => {
     try {
 
         const userId = req.params.id;
-        const role = req.body.role;
+        // const role = req.body.role;
+        const {role} = req.body;
 
         const newRole = await User.findByIdAndUpdate(
             {
