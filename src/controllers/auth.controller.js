@@ -11,12 +11,13 @@ export const register = async (req, res) => {
 		const { name, email, password } = req.body;
 
 		if (!name) {
-			return res.status(400).json(
-				{
-					success: false,
-					message: "Enter a name"
-				}
-			)
+			// return res.status(400).json(
+			// 	{
+			// 		success: false,
+			// 		message: "Enter a name"
+			// 	}
+			// )
+			throw new Error('Enter a name')
 		}
 
 		if (password.length < 6 || password.length > 10) {
@@ -59,10 +60,13 @@ export const register = async (req, res) => {
 		//     error: error
 		// })
 		if (error.message === 'Password must contain between 6 and 10 characters') {
-			handleError(res, error.message, 404)
+			return handleError(res, error.message, 404)
 		}
 		if (error.message === 'Format email invalid') {
-			handleError(res, error.message, 404)
+			return handleError(res, error.message, 404)
+		}
+		if (error.message === 'Enter a name') {
+			return handleError(res, error.message, 404)
 		}
 
 		handleError(res, "User cant be registered", 500)

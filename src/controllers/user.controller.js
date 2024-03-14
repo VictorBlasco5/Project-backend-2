@@ -110,7 +110,7 @@ export const deleteUser = async (req, res) => {
 
         const userId = req.params.id;
 
-
+        //validacion para saber si existe el usuario
         if(userId !== userId.userId) {
 			return res.status(400).json(
 				{
