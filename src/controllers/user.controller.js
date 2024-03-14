@@ -1,4 +1,5 @@
 import User from "../models/User.js"
+import { handleError } from "../utils/handleError.js";
 
 
 //VER TODOS LOS USUARIOS
@@ -14,11 +15,12 @@ export const getUsers = async (req, res) => {
         })
 
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "It is not possible to recover the users",
-            error: error
-        })
+        // res.status(500).json({
+        //     success: false,
+        //     message: "It is not possible to recover the users",
+        //     error: error
+        // })
+        handleError(res, "It is not possible to recover the users", 500)
     }
 }
 
@@ -34,13 +36,15 @@ export const getUserProfile = async (req, res) => {
                 _id: userId
             }
         ).select("-password") // oculto la contraseña
+
         if (!userProfile) {
-            return res.status(404).json(
-                {
-                    success: false,
-                    message: "User not found"
-                }
-            )
+            // return res.status(404).json(
+            //     {
+            //         success: false,
+            //         message: "User not found"
+            //     }
+            // )
+            throw new Error('User not found')
         }
 
         res.status(200).json({
@@ -50,11 +54,15 @@ export const getUserProfile = async (req, res) => {
         })
 
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "It is not possible to recover the user",
-            error: error
-        })
+        // res.status(500).json({
+        //     success: false,
+        //     message: "It is not possible to recover the user",
+        //     error: error
+        // })
+        if (error.message === 'User not found') {
+			return handleError(res, error.message, 404)
+		}
+        handleError(res, "It is not possible to recover the user", 500)
     }
 }
 
@@ -69,12 +77,13 @@ export const updateProfile = async (req, res) => {
 
         const validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
 		if (!validEmail.test(email)) {
-			return res.status(400).json(
-			    {
-			        success: false,
-			        message: "Format email invalid"
-			    }
-			)
+			// return res.status(400).json(
+			//     {
+			//         success: false,
+			//         message: "Format email invalid"
+			//     }
+			// )
+            throw new Error('Format email invalid')
         }
 
         const userProfile = await User.findOneAndUpdate(
@@ -87,7 +96,7 @@ export const updateProfile = async (req, res) => {
             {
                 new: true
             }
-        )
+        ).select("-password")
 
         res.status(200).json({
             success: true,
@@ -96,11 +105,15 @@ export const updateProfile = async (req, res) => {
         })
 
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "It is not possible to update the user",
-            error: error
-        })
+        // res.status(500).json({
+        //     success: false,
+        //     message: "It is not possible to update the user",
+        //     error: error
+        // })
+        if (error.message === 'Format email invalid') {
+			return handleError(res, error.message, 400)
+		}
+        handleError(res, "It is not possible to update the user", 500)
     }
 }
 
@@ -111,7 +124,7 @@ export const deleteUser = async (req, res) => {
         const userId = req.params.id;
 
 
-        const removeUser = await User.findByIdAndDelete(userId)
+        const removeUser = await User.findByIdAndDelete(userId).select("-password")
 
         res.status(200).json({
             success: true,
@@ -120,11 +133,12 @@ export const deleteUser = async (req, res) => {
         })
 
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "It is not possible to delete the user",
-            error: error
-        })
+        // res.status(500).json({
+        //     success: false,
+        //     message: "It is not possible to delete the user",
+        //     error: error
+        // })
+        handleError(res, "It is not possible to delete the user", 500)
     }
 }
 
@@ -146,7 +160,7 @@ export const updateRole = async (req, res) => {
             {
                 new: true
             }
-        )
+        ).select("-password")
 
         res.status(200).json({
             success: true,
@@ -155,10 +169,11 @@ export const updateRole = async (req, res) => {
         })
 
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "It is not possible to update the role",
-            error: error
-        })
+        // res.status(500).json({
+        //     success: false,
+        //     message: "It is not possible to update the role",
+        //     error: error
+        // })
+        handleError(res, "It is not possible to update the role", 500)
     }
 }
