@@ -1,5 +1,5 @@
 import Post from "../models/Post.js";
-import User from "../models/User.js";
+import { handleError } from "../utils/handleError.js";
 
 //CREAR POST
 export const createPosts = async (req, res) => {
@@ -10,10 +10,11 @@ export const createPosts = async (req, res) => {
         const { userId } = req.tokenData;
         
         if (!description) {
-            return res.status(404).json({
-                success: false,
-                message: "Description is necessary"
-            })
+            // return res.status(404).json({
+            //     success: false,
+            //     message: "Description is necessary"
+            // })
+            throw new Error('Description is necessary')
         }
 
         const newPost = await Post.create(
@@ -30,11 +31,15 @@ export const createPosts = async (req, res) => {
         })
 
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "It is not possible to create the posts",
-            error: error
-        })
+        // res.status(500).json({
+        //     success: false,
+        //     message: "It is not possible to create the posts",
+        //     error: error
+        // })
+        if (error.message === 'Description is necessary') {
+			return handleError(res, error.message, 404)
+		}
+        handleError(res, "It is not possible to create the posts", 500)
     }
 }
 
@@ -50,13 +55,15 @@ export const deletePosts = async (req, res) => {
         const post = await Post.findById(postId)
 
         if(userId !== post.userId) {
-            return res.status(400) (
-                {
-                    success:false,
-                    message:"You cant delete the post"
-                }
-            )
+            // return res.status(400) (
+            //     {
+            //         success:false,
+            //         message:"You cant delete the post"
+            //     }
+            // )
+            throw new Error('You cant delete the post')
         }
+       
 
         const postRemove = await Post.findByIdAndDelete(
 
@@ -73,11 +80,15 @@ export const deletePosts = async (req, res) => {
         })
 
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "It is not possible to delete the posts",
-            error: error
-        })
+        // res.status(500).json({
+        //     success: false,
+        //     message: "It is not possible to delete the posts",
+        //     error: error
+        // })
+        if (error.message === 'You cant delete the post') {
+			return handleError(res, error.message, 404)
+		}
+        handleError(res, "It is not possible to delete the post", 500)
     }
 }
 
@@ -100,10 +111,11 @@ export const updatePosts = async (req, res) => {
         const post = await Post.findById(postId)
 
         if(userId !== post.userId){
-            return res.status(400).json({
-                succes:false,
-                message:"You cant update the post"
-            })
+            // return res.status(400).json({
+            //     succes:false,
+            //     message:"You cant update the post"
+            // })
+            throw new Error('You cant update the post')
         }
 
         const postUpdate = await Post.findByIdAndUpdate(
@@ -125,11 +137,15 @@ export const updatePosts = async (req, res) => {
         })
 
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "It is not possible to update the post",
-            error: error
-        })
+        // res.status(500).json({
+        //     success: false,
+        //     message: "It is not possible to update the post",
+        //     error: error
+        // })
+        if (error.message === 'You cant update the post') {
+			return handleError(res, error.message, 404)
+		}
+        handleError(res, "It is not possible to update the post", 500)
     }
 }
 
@@ -146,11 +162,12 @@ export const getPosts = async (req, res) => {
         })
 
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "It is not possible to recover the posts",
-            error: error
-        })
+        // res.status(500).json({
+        //     success: false,
+        //     message: "It is not possible to recover the posts",
+        //     error: error
+        // })
+        handleError(res, "It is not possible to recover the posts", 500)
     }
 }
 
@@ -169,11 +186,12 @@ export const getPostById = async (req, res) => {
         })
 
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "It is not possible to recover the post",
-            error: error
-        })
+        // res.status(500).json({
+        //     success: false,
+        //     message: "It is not possible to recover the post",
+        //     error: error
+        // })
+        handleError(res, "It is not possible to recover the post", 500)
     }
 }
 
@@ -198,11 +216,12 @@ export const getMyPosts = async (req, res) => {
             data: myPosts
         })
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "It is not possible to recover the posts",
-            error: error
-        })
+        // res.status(500).json({
+        //     success: false,
+        //     message: "It is not possible to recover the posts",
+        //     error: error
+        // })
+        handleError(res, "It is not possible to recover the posts", 500)
     }
 }
 
@@ -224,11 +243,12 @@ export const getPostsOfUser = async (req, res) => {
             data: postsUser
         })
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "It is not possible to recover the posts",
-            error: error
-        })
+        // res.status(500).json({
+        //     success: false,
+        //     message: "It is not possible to recover the posts",
+        //     error: error
+        // })
+        handleError(res, "It is not possible to recover the posts", 500)
     }
 }
 
@@ -273,10 +293,11 @@ export const addLike = async (req, res) => {
         }
 
     } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "It is not possible to added the like",
-            error: error
-        })
+        // res.status(500).json({
+        //     success: false,
+        //     message: "It is not possible to added the like",
+        //     error: error
+        // })
+        handleError(res, "It is not possible to added the like", 500)
     }
 }
