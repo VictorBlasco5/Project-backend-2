@@ -132,31 +132,18 @@ Pasamos el token del usuario para ver sus posts.
 Pasamos el token del usuario para todos los posts.
 
 - `GET /api/posts/{id}` - **Ver un post.**
-Pasamos el token del usuario y el id del post por parámetro..
+Pasamos el token del usuario y el id del post por parámetro.
 
-- `GET /api/posts/{id}` - **Recuperar una cita.**
-Pasamos por parametro el numero de id del servicio que queramos recuperar.
-
-
-
-##### Servicios
-- `GET /api/services` - **Ver todos los servicios.**
-- `POST /api/services` - **Crear un servicio. (Solo el superadmin)**
-Pasamos el token del superadmin y los siguientes datos por el body. Ejemplo:
-````
-{
-"service_name": "Personalized tattoo",
-"description": "Customers will have the freedom to select unique motifs and designs, fully customizing their tattoo experience according to their preferences and tastes."
-}
-````
-- `PUT /api/services/{id}` - **Modificar un servicio. (Solo el superadmin)**
-Pasamos el token del superadmin y los datos a modificar por el body.
+- `GET /api/posts/users/{user-id}` - **Ver todos los posts de un usuario.**
+Pasamos el token del usuario y el id del usuario que queremos ver por parámetro.
 
 
+##### Likes
+- `PUT /api/posts/like/{id}` - **Dar y quitar like a un post**
+
+Pasamos el token del usuario y el id del post por parámetro.
 
 
-### Futuras funcionalidades 	:rocket:
-- Posibilidad de elegir entre distintos tatuadores.
 
 ### Autor :curly_haired_man:
 - **Víctor Blasco** - Project Developer.
