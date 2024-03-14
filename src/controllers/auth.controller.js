@@ -80,40 +80,42 @@ export const login = async (req, res) => {
 		const { email, password } = req.body;
 
 		if (!email || !password) {
-			return res.status(400).json({
-				success: false,
-				message: "email and password are mandatories",
-			});
+			// return res.status(400).json({
+			// 	success: false,
+			// 	message: "email and password are mandatories",
+			// });
+			throw new Error('Email and password are mandatories')
 		}
 
 		const validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
 		if (!validEmail.test(email)) {
-			return res.status(400).json({
-				success: false,
-				message: "Email format is not valid",
-			});
+			// return res.status(400).json({
+			// 	success: false,
+			// 	message: "Email format is not valid",
+			// });
+			throw new Error('Email format is not valid')
 		}
 
 		const user = await User.findOne({
 			email: email,
 		});
 
-		console.log(user);
-
 		if (!user) {
-			res.status(400).json({
-				success: false,
-				message: "Email or password invalid",
-			});
+			// res.status(400).json({
+			// 	success: false,
+			// 	message: "Email or password invalid",
+			// });
+			throw new Error('Email or password invalid')
 		}
 
 		const isValidPassword = bcrypt.compareSync(password, user.password);
 
 		if (!isValidPassword) {
-			return res.status(400).json({
-				success: false,
-				message: "Email or password invalid",
-			});
+			// return res.status(400).json({
+			// 	success: false,
+			// 	message: "Email or password invalid",
+			// });
+			throw new Error('Email or password invalid')
 		}
 
 		const token = jwt.sign(
@@ -133,10 +135,20 @@ export const login = async (req, res) => {
 			token: token
 		});
 	} catch (error) {
-		res.status(500).json({
-			success: false,
-			message: "User cant be logged",
-			error: error,
-		});
+		// res.status(500).json({
+		// 	success: false,
+		// 	message: "User cant be logged",
+		// 	error: error,
+		// });
+		if (error.message === 'Email and password are mandatories') {
+			return handleError(res, error.message, 404)
+		}
+		if (error.message === 'Email format is not valid') {
+			return handleError(res, error.message, 404)
+		}
+		if (error.message === 'Email or password invalid') {
+			return handleError(res, error.message, 404)
+		}
+		handleError(res, "User cant be registered", 500)
 	}
 };
