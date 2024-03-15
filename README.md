@@ -1,15 +1,14 @@
 # Red social :busts_in_silhouette:
-Bienvenido a la documentación de la API de mi red social. Es mi quinto proyecto desarrollado en GeeksHubs Academy en el cual se ponen en práctica habilidades de desarrollo backend con JavaScrpt y MongoDB Compass.
+Bienvenido a la documentación de la API de mi red social. Es mi quinto proyecto desarrollado en GeeksHubs Academy en el cual se ponen en práctica habilidades de desarrollo backend con JavaScript y MongoDB Compass.
 
 ## Tabla de contenido :page_with_curl:
 
-- [Tecnologías.](#tecnologías)
-- [Diagrama.](#diagrama-bd)
-- [Instalación en local.](#instalación-en-local)
-- [Usuarios modelo](#usuarios-modelo)
-- [Endpoint.](#endpoints)
-- [Futuras funcionalidades.](#futuras-funcionalidades)
-- [Autor.](#autor)
+- [Tecnologías.](#tecnologías-star2)
+- [Diagrama.](#diagrama-bd-book)
+- [Instalación en local.](#instalación-en-local-gear)
+- [Usuarios modelo](#usuarios-modelo-pouting_face)
+- [Endpoint.](#endpoints-dart)
+- [Autor.](#autor-curly_haired_man)
 - [Agradecimientos.](#agradecimientos)
 
 ### Tecnologías :star2:
@@ -90,6 +89,7 @@ Pasamos los siguientes datos por el body. Ejemplo:
 ##### Usuarios
 
 - `GET /api/users` - **Ver todos los usuarios.** Pasamos el token del propio usuario. 
+
 ![Token](./src/img/token.jpg)
 
 - `GET /api/users/profile` - **Ver perfil de usuario.**
@@ -107,6 +107,8 @@ Pasamos el token del propio usuario y los datos que queramos modificar por el bo
 
 - `DELETE /api/users/{id}` - **Eliminar usuario. (Solo el superadmin)**
 Pasamos el token del superadmin y el id del usuario a eliminar por parámetro.
+
+
 ![Parámetro](./src//img/parámetro.jpg)
 
 - `PUT /api/users/{id}/role` - **Modificar el role del usuario. (Solo el superadmin)**
