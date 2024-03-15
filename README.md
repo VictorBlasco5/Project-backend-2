@@ -1,4 +1,4 @@
-# Tattoo Studio :black_nib:
+# Red social :busts_in_silhouette:
 Bienvenido a la documentación de la API de mi red social. Es mi quinto proyecto desarrollado en GeeksHubs Academy en el cual se ponen en práctica habilidades de desarrollo backend con JavaScrpt y MongoDB Compass.
 
 ## Tabla de contenido :page_with_curl:
@@ -14,17 +14,23 @@ Bienvenido a la documentación de la API de mi red social. Es mi quinto proyecto
 
 ### Tecnologías :star2:
 
-<img src="https://img.shields.io/badge/JAVASCRIPT-000000?style=for-the-badge&logo=javascript&logoColor=yelow" alt="JS" />  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" /> <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />  <img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white" alt="JWT" />
+<img src="https://img.shields.io/badge/JAVASCRIPT-000000?style=for-the-badge&logo=javascript&logoColor=yelow" alt="JS" /> 
+<img src="https://img.shields.io/badge/MongoDB-229954?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
+
+<img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express.js" />
+ <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" /> <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />  <img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white" alt="JWT" />
+ <img src="https://img.shields.io/badge/{/}  fl0-0B615E?style=for-the-badge&logo=postma&logoColor=white" alt="FL0" />
+
 
 ### Diagrama BD :book:
 
-
+![Diagrama](./src/img/diagrama.jpg)
 
 ### Instalación en local :gear:
 
 **1. Clona el repositorio.**
 ````
-
+git clone https://github.com/VictorBlasco5/Proyect-backend-2
 ````
 **2. Instalar las dependencias.**
 ````
@@ -35,7 +41,7 @@ $ npm install
 $ npm run dev
 ````
 
-**5. Ejecutar los seeders.**
+**4. Ejecutar los seeders.**
 ````
 $ npm run seed
 ````
@@ -71,6 +77,7 @@ Pasamos los siguientes datos por el body. Ejemplo:
    "password": "contraseña"
 }
 ````
+![Body](./src/img/body.jpg)
 
 - `POST /api/auth/login` - **Inicio de sesión.**
 Pasamos los siguientes datos por el body. Ejemplo:
@@ -100,11 +107,11 @@ Pasamos el token del propio usuario y los datos que queramos modificar por el bo
 
 - `DELETE /api/users/{id}` - **Eliminar usuario. (Solo el superadmin)**
 Pasamos el token del superadmin y el id del usuario a eliminar por parámetro.
-![Parámetro](./src/img/parametro.jpg)
+![Parámetro](./src//img/parámetro.jpg)
 
 - `PUT /api/users/{id}/role` - **Modificar el role del usuario. (Solo el superadmin)**
 Pasamos el token del superadmin y el id del usuario a modificar por parámetro.
-![Parámetro](./src/img/parametro.jpg)
+
 
 ##### Posts
 - `POST /api/posts` - **Crear post.**
