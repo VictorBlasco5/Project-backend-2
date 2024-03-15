@@ -282,8 +282,9 @@ export const addLike = async (req, res) => {
             })
         }
 
+   
         if (user) {
-            post.like.pop(userId);
+            post.like.pull(userId);
             await post.save();
 
             return res.status(200).json({
