@@ -6,6 +6,7 @@ Bienvenido a la documentación de la API de mi red social. Es mi quinto proyecto
 - [Tecnologías.](#tecnologías-star2)
 - [Diagrama.](#diagrama-bd-book)
 - [Instalación en local.](#instalación-en-local-gear)
+- [Implementación en vivo. ](#implementación-en-vivo)
 - [Usuarios modelo](#usuarios-modelo-pouting_face)
 - [Endpoint.](#endpoints-dart)
 - [Autor.](#autor-curly_haired_man)
@@ -13,12 +14,7 @@ Bienvenido a la documentación de la API de mi red social. Es mi quinto proyecto
 
 ### Tecnologías :star2:
 
-<img src="https://img.shields.io/badge/JAVASCRIPT-000000?style=for-the-badge&logo=javascript&logoColor=yelow" alt="JS" /> 
-<img src="https://img.shields.io/badge/MongoDB-229954?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
-
-<img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express.js" />
- <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" /> <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />  <img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white" alt="JWT" />
- <img src="https://img.shields.io/badge/{/}  fl0-0B615E?style=for-the-badge&logo=postma&logoColor=white" alt="FL0" />
+<img src="https://img.shields.io/badge/JAVASCRIPT-000000?style=for-the-badge&logo=javascript&logoColor=yelow" alt="JS" /> <img src="https://img.shields.io/badge/MongoDB-229954?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" /> <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express.js" /> <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" /> <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" /> <img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white" alt="JWT" /> <img src="https://img.shields.io/badge/{/}  fl0-0B615E?style=for-the-badge&logo=postma&logoColor=white" alt="FL0" />
 
 
 ### Diagrama BD :book:
@@ -44,6 +40,10 @@ $ npm run dev
 ````
 $ npm run seed
 ````
+### Implementación en vivo
+
+https://proyect-backend-2-dev-hbfk.2.us-1.fl0.io
+
 
 ### Usuarios modelo :pouting_face:
 #### User
