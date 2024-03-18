@@ -1,6 +1,8 @@
+# Red social :busts_in_silhouette:
+
 ![Diagrama](./src/img/red-social.jpg)
 
-# Red social :busts_in_silhouette:
+
 Bienvenido a la documentación de la API de mi red social. Es mi quinto proyecto desarrollado en GeeksHubs Academy en el cual se ponen en práctica habilidades de desarrollo backend con JavaScript y MongoDB Compass.
 
 ## Tabla de contenido :page_with_curl:
