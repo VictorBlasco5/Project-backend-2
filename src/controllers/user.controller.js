@@ -1,11 +1,9 @@
 import User from "../models/User.js"
 import { handleError } from "../utils/handleError.js";
 
-
 //VER TODOS LOS USUARIOS
 export const getUsers = async (req, res) => {
     try {
-
         const users = await User.find().select("-password")
 
         res.status(200).json({
@@ -15,11 +13,6 @@ export const getUsers = async (req, res) => {
         })
 
     } catch (error) {
-        // res.status(500).json({
-        //     success: false,
-        //     message: "It is not possible to recover the users",
-        //     error: error
-        // })
         handleError(res, "It is not possible to recover the users", 500)
     }
 }
@@ -27,9 +20,7 @@ export const getUsers = async (req, res) => {
 //VER PERFIL DE USUARIO
 export const getUserProfile = async (req, res) => {
     try {
-
-        // const userId = req.tokenData.userId
-        const {userId} = req.tokenData;
+        const { userId } = req.tokenData;
 
         const userProfile = await User.find(
             {
@@ -38,12 +29,6 @@ export const getUserProfile = async (req, res) => {
         ).select("-password") // oculto la contraseña
 
         if (!userProfile) {
-            // return res.status(404).json(
-            //     {
-            //         success: false,
-            //         message: "User not found"
-            //     }
-            // )
             throw new Error('User not found')
         }
 
@@ -54,14 +39,9 @@ export const getUserProfile = async (req, res) => {
         })
 
     } catch (error) {
-        // res.status(500).json({
-        //     success: false,
-        //     message: "It is not possible to recover the user",
-        //     error: error
-        // })
         if (error.message === 'User not found') {
-			return handleError(res, error.message, 404)
-		}
+            return handleError(res, error.message, 404)
+        }
         handleError(res, "It is not possible to recover the user", 500)
     }
 }
@@ -69,20 +49,11 @@ export const getUserProfile = async (req, res) => {
 //Actualizar datos
 export const updateProfile = async (req, res) => {
     try {
-
-        // const userId = req.tokenData.userId;
-        // const email = req.body.email
-        const {userId} = req.tokenData;
-        const {email} = req.body;
+        const { userId } = req.tokenData;
+        const { email } = req.body;
 
         const validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
-		if (!validEmail.test(email)) {
-			// return res.status(400).json(
-			//     {
-			//         success: false,
-			//         message: "Format email invalid"
-			//     }
-			// )
+        if (!validEmail.test(email)) {
             throw new Error('Format email invalid')
         }
 
@@ -105,14 +76,9 @@ export const updateProfile = async (req, res) => {
         })
 
     } catch (error) {
-        // res.status(500).json({
-        //     success: false,
-        //     message: "It is not possible to update the user",
-        //     error: error
-        // })
         if (error.message === 'Format email invalid') {
-			return handleError(res, error.message, 400)
-		}
+            return handleError(res, error.message, 400)
+        }
         handleError(res, "It is not possible to update the user", 500)
     }
 }
@@ -120,9 +86,7 @@ export const updateProfile = async (req, res) => {
 //ELIMINAR USUARIO
 export const deleteUser = async (req, res) => {
     try {
-
         const userId = req.params.id;
-
 
         const removeUser = await User.findByIdAndDelete(userId).select("-password")
 
@@ -133,11 +97,6 @@ export const deleteUser = async (req, res) => {
         })
 
     } catch (error) {
-        // res.status(500).json({
-        //     success: false,
-        //     message: "It is not possible to delete the user",
-        //     error: error
-        // })
         handleError(res, "It is not possible to delete the user", 500)
     }
 }
@@ -145,10 +104,8 @@ export const deleteUser = async (req, res) => {
 //CAMBIO DE ROLE
 export const updateRole = async (req, res) => {
     try {
-
         const userId = req.params.id;
-        // const role = req.body.role;
-        const {role} = req.body;
+        const { role } = req.body;
 
         const newRole = await User.findByIdAndUpdate(
             {
@@ -169,11 +126,6 @@ export const updateRole = async (req, res) => {
         })
 
     } catch (error) {
-        // res.status(500).json({
-        //     success: false,
-        //     message: "It is not possible to update the role",
-        //     error: error
-        // })
         handleError(res, "It is not possible to update the role", 500)
     }
 }
