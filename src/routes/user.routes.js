@@ -5,7 +5,7 @@ import {superAdmin} from "../middlewares/superAdmin.js"
 
 const router = Router();
 
-router.get('/',auth, getUsers)
+router.get('/',auth, superAdmin, getUsers)
 router.get('/profile',auth, getUserProfile)
 router.put('/profile',auth, updateProfile)
 router.delete('/:id',auth, superAdmin, deleteUser)
