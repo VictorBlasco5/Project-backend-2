@@ -189,39 +189,35 @@ export const addLike = async (req, res) => {
         const { userId } = req.tokenData;
         const postId = req.params.id;
 
-        const post = await Post.findById(
-            {
-                _id: postId
-            }
-        )
+        const post = await Post.findById(postId);
 
-        const user = await Post.findOne(
-            {
-                like: userId
-            }
-        )
+        if (!post) {
+            return res.status(404).json({
+                success: false,
+                message: "Post not found"
+            });
+        }
 
-        if (!user) {
+        const likedIndex = post.like.indexOf(userId);
+
+        if (likedIndex === -1) {
             post.like.push(userId);
             await post.save();
 
             return res.status(200).json({
                 success: true,
                 message: "Like added"
-            })
-        }
-
-        if (user) {
-            post.like.pull(userId);
+            });
+        } else {
+            post.like.splice(likedIndex, 1);
             await post.save();
 
             return res.status(200).json({
                 success: true,
                 message: "Like removed"
-            })
+            });
         }
-
     } catch (error) {
-        handleError(res, "It is not possible to added the like", 500)
+        handleError(res, "It is not possible to added the like", 500);
     }
 }

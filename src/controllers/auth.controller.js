@@ -11,8 +11,8 @@ export const register = async (req, res) => {
 			throw new Error('Enter a name')
 		}
 
-		if (password.length < 6 || password.length > 10) {
-			throw new Error('Password must contain between 6 and 10 characters')
+		if (password.length < 7 || password.length > 12) {
+			throw new Error('Password must contain between 7 and 12 characters')
 		}
 
 		const validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
@@ -80,6 +80,7 @@ export const login = async (req, res) => {
 			{
 				userId: user._id,
 				roleName: user.role,
+				name: user.name,
 			},
 			process.env.JWT_SECRET,
 			{
