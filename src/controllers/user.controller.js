@@ -51,6 +51,7 @@ export const updateProfile = async (req, res) => {
     try {
         const { userId } = req.tokenData;
         const { email } = req.body;
+        const { name } = req.body;
 
         const validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
         if (!validEmail.test(email)) {
@@ -62,7 +63,7 @@ export const updateProfile = async (req, res) => {
                 _id: userId
             },
             {
-                email: email
+                name:name
             },
             {
                 new: true

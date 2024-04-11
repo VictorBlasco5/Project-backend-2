@@ -35,13 +35,16 @@ export const createPosts = async (req, res) => {
 //ELIMINAR POST
 export const deletePosts = async (req, res) => {
     try {
-        const { userId } = req.tokenData;
+        const { userId, roleName } = req.tokenData;
         const postId = req.params.id;
+        console.log(req.tokenData);
+
+        const superAdmin = roleName === 'super_admin';
 
         // validacion de que lo elimina el creador del post
         const post = await Post.findById(postId)
 
-        if (userId !== post.userId) {
+        if (userId !== post.userId && !superAdmin) {
             throw new Error('You cant delete the post')
         }
 
