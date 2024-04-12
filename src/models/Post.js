@@ -10,6 +10,10 @@ export const PostSchema = new Schema(
             type: String,
             require: true
         },
+        image: {
+            type: String,
+            required: false
+        },
         like: [ //Relacion. Va dentro de un array porque hay muchos likes en un post
         {
             type: Schema.Types.ObjectId,

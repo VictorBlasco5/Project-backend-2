@@ -4,7 +4,7 @@ import { handleError } from "../utils/handleError.js";
 //CREAR POST
 export const createPosts = async (req, res) => {
     try {
-        const { description } = req.body;
+        const { description, image } = req.body;
         const { userId } = req.tokenData;
 
         if (!description) {
@@ -14,6 +14,7 @@ export const createPosts = async (req, res) => {
         const newPost = await Post.create(
             {
                 description: description,
+                image: image,
                 userId: userId
             }
         )
