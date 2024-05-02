@@ -45,7 +45,7 @@ export const deletePosts = async (req, res) => {
         // validacion de que lo elimina el creador del post
         const post = await Post.findById(postId)
 
-        if (userId !== post.userId && !superAdmin) {
+        if (userId.toString() !== post.userId.toString() && !superAdmin) {
             throw new Error('You cant delete the post')
         }
 
@@ -112,8 +112,7 @@ export const updatePosts = async (req, res) => {
 //RECUPERAR TODOS LOS POSTS
 export const getPosts = async (req, res) => {
     try {
-        const allPosts = await Post.find()
-
+        const allPosts = await Post.find().populate('userId', 'name')
         res.status(200).json({
             success: true,
             message: "Posts retrieved successfully",

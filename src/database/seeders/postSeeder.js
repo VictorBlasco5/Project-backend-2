@@ -41,7 +41,7 @@ export const postSeeder = async (req, res) => {
 
         const post5 = new Post({
             description: "Always on your team",
-            userId: "65f3344f12af07873c9993b5",
+            userId: "65f35ee142c8d7d843b6a3ab",
             image: "https://img.freepik.com/foto-gratis/hermosa-chica-casa_144627-9748.jpg?w=740&t=st=1712908521~exp=1712909121~hmac=835817214501a3bdcd0ece6b445c48a46b9f6a9518197c9f84c27ecb46cdae1a"
         });
 
